@@ -1347,11 +1347,11 @@
         let action;
         let text = "";
 
-        const decoder = new TextDecoder();
         for (let record of socialPost.toRecords()) {
           switch (record.recordType) {
             case "text":
-              text = decoder.decode(record.data);
+              const textDecoder = new TextDecoder(record.encoding);
+              text = textDecoder.decode(record.data);
               break;
             case "act":
               action = record.data.getUint8(0);
